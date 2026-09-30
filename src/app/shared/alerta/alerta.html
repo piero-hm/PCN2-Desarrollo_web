@@ -1,0 +1,22 @@
+@if (alertaService.alerta(); as alerta) {
+  <div
+    class="alerta-flotante"
+    role="alert"
+    aria-live="assertive"
+    [class]="'alert alert-' + alerta.tipo + ' alert-dismissible fade show shadow-lg'"
+  >
+    <div class="d-flex align-items-start gap-2">
+      <i class="bi fs-4" [class]="iconoDe(alerta.tipo)"></i>
+      <div class="flex-grow-1">
+        <strong class="d-block">{{ alerta.titulo }}</strong>
+        <span>{{ alerta.mensaje }}</span>
+      </div>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Cerrar"
+        (click)="alertaService.cerrar()"
+      ></button>
+    </div>
+  </div>
+}

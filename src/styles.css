@@ -1,0 +1,64 @@
+/* ===== Estilos globales del Hospital Dr. Santo ===== */
+
+:root {
+  --marca-azul: #0b3c6d;
+  --marca-azul-claro: #116a8b;
+  --marca-verde: #14b8a6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f7fafc;
+  color: #212529;
+}
+
+/* Encabezados de sección */
+h1,
+h2,
+h3 {
+  color: var(--marca-azul);
+}
+
+/* Botón principal consistente en toda la página */
+.btn-primary {
+  background-color: var(--marca-azul);
+  border-color: var(--marca-azul);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--marca-azul-claro);
+  border-color: var(--marca-azul-claro);
+}
+
+.btn-outline-primary {
+  color: var(--marca-azul);
+  border-color: var(--marca-azul);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--marca-azul);
+  border-color: var(--marca-azul);
+}
+
+/* Controles de formulario con un aspecto suave */
+.form-control,
+.form-select {
+  border-radius: 0.5rem;
+  padding: 0.65rem 0.9rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--marca-verde);
+  box-shadow: 0 0 0 0.2rem rgba(20, 184, 166, 0.25);
+}
+
+/* Tarjetas redondeadas por defecto en las secciones */
+.card {
+  border-radius: 1rem;
+}

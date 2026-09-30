@@ -1,0 +1,22 @@
+.tarjeta {
+  border-radius: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.tarjeta:hover {
+  transform: translateY(-6px);
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0b3c6d, #14b8a6);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}

@@ -1,0 +1,85 @@
+<section class="hero text-white">
+  <div class="container py-5">
+    <div class="row align-items-center g-5">
+      <div class="col-12 col-lg-7">
+        <span class="badge text-bg-light rounded-pill mb-3 px-3 py-2">
+          <i class="bi bi-shield-check me-1"></i> Institución certificada
+        </span>
+        <h1 class="display-4 fw-bold mb-3">
+          Tu salud en las mejores manos
+        </h1>
+        <p class="lead mb-4 opacity-90">
+          El Hospital Dr. Santo ofrece atención médica especializada,
+          tecnología de punta y un trato humano para ti y tu familia,
+          las 24 horas del día.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a routerLink="/contacto" class="btn btn-light btn-lg px-4 fw-semibold">
+            <i class="bi bi-calendar2-check me-2"></i>Agendar cita
+          </a>
+          <a routerLink="/servicios" class="btn btn-outline-light btn-lg px-4">
+            Ver servicios
+          </a>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-5">
+        <div class="card border-0 shadow-lg text-dark tarjeta-destacada">
+          <div class="card-body p-4">
+            <h5 class="card-title fw-bold mb-3">
+              <i class="bi bi-heart-pulse-fill text-danger me-2"></i>¿Necesitas atención ahora?
+            </h5>
+            <p class="card-text mb-4">
+              Nuestro centro de emergencias está abierto las 24 horas.
+              Llama al <strong>106</strong> o acércate a la sala de emergencias.
+            </p>
+            <a routerLink="/medicos" class="btn btn-primary w-100">
+              Conoce a nuestros médicos
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container py-5">
+  <div class="row g-4 text-center">
+    @for (dato of datos; track dato.etiqueta) {
+      <div class="col-6 col-lg-3">
+        <div class="p-4 rounded-4 h-100 bg-white sombra-suave">
+          <p class="display-6 fw-bold text-marca mb-1">{{ dato.valor }}</p>
+          <p class="mb-0 small text-secondary">{{ dato.etiqueta }}</p>
+        </div>
+      </div>
+    }
+  </div>
+</section>
+
+<section class="container pb-5">
+  <div class="text-center mb-4">
+    <h2 class="fw-bold">Servicios destacados</h2>
+    <p class="text-secondary">Lo más solicitado por nuestros pacientes</p>
+  </div>
+
+  <div class="row g-4">
+    @for (servicio of serviciosService.servicios().slice(0, 3); track servicio.id) {
+      <div class="col-12 col-md-4">
+        <div class="card h-100 border-0 shadow-sm rounded-4 tarjeta-servicio">
+          <div class="card-body p-4 text-center">
+            <div class="icono mb-3"><i class="bi" [class]="servicio.icono"></i></div>
+            <h5 class="fw-bold">{{ servicio.nombre }}</h5>
+            <p class="text-secondary small mb-2">{{ servicio.descripcion }}</p>
+            <span class="badge text-bg-light border">{{ servicio.horario }}</span>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="text-center mt-4">
+    <a routerLink="/servicios" class="btn btn-outline-primary rounded-pill px-4">
+      Ver todos los servicios <i class="bi bi-arrow-right ms-1"></i>
+    </a>
+  </div>
+</section>

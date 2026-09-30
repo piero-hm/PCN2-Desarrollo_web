@@ -1,0 +1,35 @@
+.portada {
+  background: linear-gradient(120deg, #0b3c6d 0%, #116a8b 60%, #14b8a6 100%);
+}
+
+.bg-marca {
+  background: linear-gradient(90deg, #0b3c6d 0%, #116a8b 100%);
+}
+
+.avatar {
+  width: 2.75rem;
+  height: 2.75rem;
+  background: linear-gradient(135deg, #0b3c6d, #14b8a6);
+  flex-shrink: 0;
+}
+
+.estrella {
+  color: #c9c9c9;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.estrella.activa {
+  color: #f0ad4e;
+}
+
+.estrella:hover {
+  transform: scale(1.2);
+}
+
+.text-marca {
+  color: #0b3c6d;
+}
+
+.sombra-suave {
+  box-shadow: 0 0.25rem 1rem rgba(11, 60, 109, 0.08);
+}

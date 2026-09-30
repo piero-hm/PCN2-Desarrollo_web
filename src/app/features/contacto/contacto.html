@@ -1,0 +1,256 @@
+<section class="fondo py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="badge text-bg-primary rounded-pill mb-2 px-3 py-2">Contacto</span>
+      <h1 class="fw-bold">Solicita tu cita</h1>
+      <p class="text-secondary mx-auto" style="max-width: 42rem">
+        Completa el formulario y nuestro personal se comunicará contigo para
+        confirmar tu atención.
+      </p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <!-- Datos de contacto del hospital -->
+      <div class="col-12 col-lg-4">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+          <div class="card-body p-4">
+            <h5 class="fw-bold mb-4">Información de contacto</h5>
+
+            <div class="d-flex gap-3 mb-4">
+              <span class="icono"><i class="bi bi-geo-alt-fill"></i></span>
+              <div>
+                <p class="fw-semibold mb-0">Dirección</p>
+                <p class="text-secondary small mb-0">Av. Salud 123, Lima - Perú</p>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3 mb-4">
+              <span class="icono"><i class="bi bi-telephone-fill"></i></span>
+              <div>
+                <p class="fw-semibold mb-0">Teléfonos</p>
+                <p class="text-secondary small mb-0">(01) 555 0123 - Anexo 101</p>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3 mb-4">
+              <span class="icono"><i class="bi bi-envelope-fill"></i></span>
+              <div>
+                <p class="fw-semibold mb-0">Correo</p>
+                <p class="text-secondary small mb-0">contacto@hospitaldrsanto.pe</p>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3">
+              <span class="icono"><i class="bi bi-clock-fill"></i></span>
+              <div>
+                <p class="fw-semibold mb-0">Horario</p>
+                <p class="text-secondary small mb-0">
+                  Consultorios: Lun a Vie 7:00 - 20:00<br />
+                  Emergencias: 24 horas
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario -->
+      <div class="col-12 col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4">
+          <div class="card-body p-4 p-md-5">
+            <h5 class="fw-bold mb-4">
+              <i class="bi bi-pencil-square me-2"></i>Formulario de solicitud
+            </h5>
+
+            <form (submit)="$event.preventDefault(); enviar()" novalidate>
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="nombre">Nombre completo *</label>
+                  <input
+                    id="nombre"
+                    type="text"
+                    class="form-control"
+                    placeholder="Ej. Juan Pérez"
+                    [value]="datos().nombre"
+                    [class.is-invalid]="invalido('nombre')"
+                    (input)="actualizar('nombre', $any($event.target).value)"
+                  />
+                  <div class="invalid-feedback">Ingresa tu nombre (mínimo 3 caracteres).</div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="email">Correo electrónico *</label>
+                  <input
+                    id="email"
+                    type="email"
+                    class="form-control"
+                    placeholder="ejemplo@correo.com"
+                    [value]="datos().email"
+                    [class.is-invalid]="invalido('email')"
+                    (input)="actualizar('email', $any($event.target).value)"
+                  />
+                  <div class="invalid-feedback">Ingresa un correo electrónico válido.</div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="telefono">Teléfono *</label>
+                  <input
+                    id="telefono"
+                    type="tel"
+                    class="form-control"
+                    placeholder="Ej. 987 654 321"
+                    [value]="datos().telefono"
+                    [class.is-invalid]="invalido('telefono')"
+                    (input)="actualizar('telefono', $any($event.target).value)"
+                  />
+                  <div class="invalid-feedback">Ingresa un teléfono de 7 a 15 dígitos.</div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="servicio">Servicio de interés *</label>
+                  <select
+                    id="servicio"
+                    class="form-select"
+                    [value]="datos().servicio"
+                    [class.is-invalid]="invalido('servicio')"
+                    (change)="actualizar('servicio', $any($event.target).value)"
+                  >
+                    <option value="">Seleccione un servicio</option>
+                    @for (servicio of servicios(); track servicio.id) {
+                      <option [value]="servicio.nombre">{{ servicio.nombre }}</option>
+                    }
+                  </select>
+                  <div class="invalid-feedback">Selecciona el servicio que necesitas.</div>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label" for="mensaje">Mensaje *</label>
+                  <textarea
+                    id="mensaje"
+                    class="form-control"
+                    rows="4"
+                    placeholder="Cuéntanos brevemente el motivo de tu consulta..."
+                    [value]="datos().mensaje"
+                    [class.is-invalid]="invalido('mensaje')"
+                    (input)="actualizar('mensaje', $any($event.target).value)"
+                  ></textarea>
+                  <div class="invalid-feedback">Escribe al menos 10 caracteres.</div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-wrap gap-3 mt-4">
+                <button type="submit" class="btn btn-primary px-4 fw-semibold">
+                  <i class="bi bi-send-fill me-2"></i>Enviar solicitud
+                </button>
+                <span class="align-self-center text-secondary small">
+                  * Campos obligatorios
+                </span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Consultas almacenadas y mostradas -->
+    <div class="row justify-content-center mt-5">
+      <div class="col-12">
+        <div class="card border-0 shadow-sm rounded-4">
+          <div class="card-body p-4 p-md-5">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
+              <h5 class="fw-bold mb-0">
+                <i class="bi bi-folder2-open me-2"></i>Solicitudes registradas
+              </h5>
+              <span class="badge text-bg-primary rounded-pill">
+                {{ consultas().length }}
+                {{ consultas().length === 1 ? 'registro' : 'registros' }}
+              </span>
+            </div>
+
+            @if (consultas().length === 0) {
+              <div class="alert alert-secondary rounded-4 mb-0 text-center" role="alert">
+                <i class="bi bi-inbox me-2"></i>
+                Todavía no hay solicitudes. Envía el formulario y aparecerá aquí.
+              </div>
+            } @else {
+              <!-- Tabla para pantallas medianas y grandes -->
+              <div class="table-responsive d-none d-md-block">
+                <table class="table table-hover align-middle mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Fecha</th>
+                      <th>Nombre</th>
+                      <th>Contacto</th>
+                      <th>Servicio</th>
+                      <th>Mensaje</th>
+                      <th class="text-end">Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (consulta of consultas(); track consulta.id) {
+                      <tr>
+                        <td class="text-secondary small">{{ consulta.fecha }}</td>
+                        <td class="fw-semibold">{{ consulta.nombre }}</td>
+                        <td class="small">
+                          {{ consulta.email }}<br />
+                          {{ consulta.telefono }}
+                        </td>
+                        <td>
+                          <span class="badge text-bg-light border">{{ consulta.servicio }}</span>
+                        </td>
+                        <td class="small">{{ consulta.mensaje }}</td>
+                        <td class="text-end">
+                          <button
+                            type="button"
+                            class="btn btn-outline-danger btn-sm rounded-pill"
+                            (click)="eliminar(consulta.id)"
+                            aria-label="Eliminar solicitud"
+                          >
+                            <i class="bi bi-trash"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Tarjetas para móviles -->
+              <div class="d-md-none">
+                <div class="list-group">
+                  @for (consulta of consultas(); track consulta.id) {
+                    <div class="list-group-item rounded-3 mb-2 shadow-sm">
+                      <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                          <p class="fw-bold mb-1">{{ consulta.nombre }}</p>
+                          <span class="badge text-bg-light border">{{ consulta.servicio }}</span>
+                        </div>
+                        <button
+                          type="button"
+                          class="btn btn-outline-danger btn-sm rounded-circle"
+                          (click)="eliminar(consulta.id)"
+                          aria-label="Eliminar solicitud"
+                        >
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </div>
+                      <p class="small text-secondary mb-1 mt-2">{{ consulta.mensaje }}</p>
+                      <p class="small mb-0">
+                        <i class="bi bi-telephone me-1"></i>{{ consulta.telefono }}
+                        <span class="mx-1">•</span>
+                        <i class="bi bi-envelope me-1"></i>{{ consulta.email }}
+                      </p>
+                      <p class="small text-secondary mb-0 mt-1">
+                        <i class="bi bi-clock-history me-1"></i>{{ consulta.fecha }}
+                      </p>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

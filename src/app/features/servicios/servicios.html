@@ -1,0 +1,29 @@
+<section class="container py-5">
+  <div class="text-center mb-5">
+    <span class="badge text-bg-primary rounded-pill mb-2 px-3 py-2">Nuestros servicios</span>
+    <h1 class="fw-bold">Servicios del hospital</h1>
+    <p class="text-secondary mx-auto" style="max-width: 42rem">
+      Contamos con unidades especializadas para atender tus necesidades de salud
+      con estándares de calidad y calidez humana.
+    </p>
+  </div>
+
+  <div class="row g-4">
+    @for (servicio of serviciosService.servicios(); track servicio.id) {
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm rounded-4 tarjeta">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <span class="icono"><i class="bi" [class]="servicio.icono"></i></span>
+              <h5 class="fw-bold mb-0">{{ servicio.nombre }}</h5>
+            </div>
+            <p class="text-secondary mb-3">{{ servicio.descripcion }}</p>
+            <span class="badge text-bg-light border">
+              <i class="bi bi-clock me-1"></i>{{ servicio.horario }}
+            </span>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>

@@ -1,0 +1,39 @@
+.bg-marca {
+  background: linear-gradient(90deg, #0b3c6d 0%, #116a8b 100%);
+}
+
+.badge-icono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: #ffffff26;
+  font-size: 1.1rem;
+}
+
+.nav-link {
+  font-weight: 500;
+  padding-inline: 0.75rem;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+}
+
+.nav-link.activo {
+  color: #ffffff;
+  border-bottom: 3px solid #4fd1c5;
+}
+
+.btn-cta {
+  background: #14b8a6;
+  color: #ffffff;
+  border: none;
+}
+
+.btn-cta:hover {
+  background: #0d9488;
+  color: #ffffff;
+}

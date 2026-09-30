@@ -1,0 +1,160 @@
+<section class="portada text-white">
+  <div class="container py-5 text-center">
+    <span class="badge text-bg-light rounded-pill mb-3 px-3 py-2">
+      <i class="bi bi-chat-quote-fill me-1"></i> Opiniones
+    </span>
+    <h1 class="fw-bold mb-2">Reseñas de nuestros pacientes</h1>
+    <p class="opacity-75 mx-auto mb-0" style="max-width: 44rem">
+      La opinión de quienes nos visitan nos ayuda a mejorar cada día.
+    </p>
+  </div>
+</section>
+
+<section class="container py-5">
+  <!-- Resumen general -->
+  <div class="row justify-content-center mb-5">
+    <div class="col-12 col-md-6 col-lg-4 text-center">
+      <div class="p-4 rounded-4 bg-white sombra-suave">
+        <p class="display-4 fw-bold text-marca mb-1">{{ resenasService.promedio() }}</p>
+        <div class="fs-4 mb-2">
+          @for (estrella of estrellas; track estrella) {
+            <i
+              class="bi"
+              [class]="
+                estrella <= Math.round(resenasService.promedio())
+                  ? 'bi bi-star-fill text-warning'
+                  : 'bi bi-star text-warning'
+              "
+            ></i>
+          }
+        </div>
+        <p class="text-secondary mb-0">
+          Basado en {{ resenasService.resenas().length }} reseñas
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- Formulario con Signals -->
+    <div class="col-12 col-lg-5">
+      <div class="card border-0 shadow-sm rounded-4 h-100">
+        <div class="card-header bg-marca text-white py-3 rounded-top-4">
+          <h4 class="mb-0 fw-bold"><i class="bi bi-pencil-square me-2"></i>Deja tu reseña</h4>
+        </div>
+
+        <div class="card-body p-4">
+          @if (errores().length > 0) {
+            <div class="alert alert-danger py-2 small border-0 rounded-3" role="alert">
+              <ul class="mb-0 ps-3">
+                @for (error of errores(); track error) {
+                  <li>{{ error }}</li>
+                }
+              </ul>
+            </div>
+          }
+
+          <form (submit)="$event.preventDefault(); enviar()" novalidate>
+            <div class="mb-3">
+              <label for="paciente" class="form-label fw-semibold">Nombre y apellido</label>
+              <input
+                id="paciente"
+                type="text"
+                class="form-control"
+                placeholder="Ej. Ana López"
+                [value]="formulario().paciente"
+                [class.is-invalid]="errores().length > 0 && formulario().paciente.trim().length < 3"
+                (input)="actualizarCampo('paciente', $any($event.target).value)"
+              />
+              <div class="invalid-feedback">Ingresa tu nombre (mínimo 3 caracteres).</div>
+            </div>
+
+            <div class="mb-3">
+              <span class="form-label fw-semibold d-block">Puntuación</span>
+              <div class="d-flex gap-1 fs-4 align-items-center">
+                @for (estrella of estrellas; track estrella) {
+                  <button
+                    type="button"
+                    class="btn btn-sm p-0 border-0 estrella"
+                    [class.activa]="estrella <= formulario().puntuacion"
+                    (click)="actualizarPuntuacion(estrella)"
+                    [attr.aria-label]="'Puntuar con ' + estrella + ' estrellas'"
+                  >
+                    <i
+                      class="bi"
+                      [class.bi-star-fill]="estrella <= formulario().puntuacion"
+                      [class.bi-star]="estrella > formulario().puntuacion"
+                    ></i>
+                  </button>
+                }
+                <span class="ms-2 text-secondary fs-6">{{ formulario().puntuacion }} / 5</span>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label for="comentario" class="form-label fw-semibold">Comentario</label>
+              <textarea
+                id="comentario"
+                class="form-control"
+                rows="4"
+                placeholder="Cuéntanos cómo fue tu experiencia..."
+                [value]="formulario().comentario"
+                [class.is-invalid]="errores().length > 0 && formulario().comentario.trim().length < 10"
+                (input)="actualizarCampo('comentario', $any($event.target).value)"
+              ></textarea>
+              <div class="invalid-feedback">El comentario debe tener al menos 10 caracteres.</div>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100 fw-semibold rounded-pill py-2">
+              <i class="bi bi-send-fill me-2"></i>Publicar reseña
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Listado de reseñas -->
+    <div class="col-12 col-lg-7">
+      <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <h2 class="fw-bold mb-0 h4">Opiniones ({{ resenasService.resenas().length }})</h2>
+        <span class="badge text-bg-warning-subtle text-warning-emphasis px-3 py-2">
+          <i class="bi bi-star-fill me-1"></i> Promedio {{ resenasService.promedio() }}
+        </span>
+      </div>
+
+      <div class="d-flex flex-column gap-3">
+        @for (resena of resenasService.resenas(); track resena.id) {
+          <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-body p-4">
+              <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                <div class="d-flex align-items-center gap-3">
+                  <span class="avatar rounded-circle text-white fw-bold d-flex align-items-center justify-content-center">
+                    {{ iniciales(resena.paciente) }}
+                  </span>
+                  <div>
+                    <h6 class="mb-0 fw-bold">{{ resena.paciente }}</h6>
+                    <small class="text-secondary">{{ resena.fecha }}</small>
+                  </div>
+                </div>
+                <div class="text-warning">
+                  @for (estrella of estrellas; track estrella) {
+                    <i
+                      class="bi"
+                      [class.bi-star-fill]="estrella <= resena.puntuacion"
+                      [class.bi-star]="estrella > resena.puntuacion"
+                    ></i>
+                  }
+                </div>
+              </div>
+              <p class="mb-0 mt-3 small">{{ resena.comentario }}</p>
+            </div>
+          </div>
+        } @empty {
+          <div class="alert alert-info border-0 shadow-sm rounded-4">
+            <i class="bi bi-info-circle me-2"></i>Todavía no hay reseñas, sé el primero en opinar.
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
